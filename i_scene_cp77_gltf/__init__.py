@@ -1,6 +1,6 @@
 bl_info = {
     "name": "Cyberpunk 2077 glTF Importer",
-    "author": "HitmanHimself, Turk, Jato",
+    "author": "HitmanHimself, Turk, Jato, Zendrex",
     "version": (1, 0, 5),
     "blender": (2, 93, 0),
     "location": "File > Import-Export",

@@ -64,6 +64,7 @@ class MeshDecal:
 
             if "HeightTexture" in Data:
                 hMap = CreateShaderNodeHeightMap(CurMat,self.BasePath + Data["HeightTexture"],-200,-300,'HeightTexture',self.image_format)
+                hMap.inputs[0].default_value = Data["HeightStrength"]
                 CurMat.links.new(nMap.outputs[0],hMap.inputs[5])
                 CurMat.links.new(hMap.outputs[0],CurMat.nodes['Principled BSDF'].inputs['Normal'])
             else:

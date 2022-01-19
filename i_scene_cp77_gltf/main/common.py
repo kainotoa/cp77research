@@ -146,6 +146,8 @@ def CreateShaderNodeHeightMap(curMat,path = None, x = 0, y = 0, name = None,imag
         Img = imageFromPath(path,image_format,nonCol)
         ImgNode.image = Img
 
+        curMat.links.new(ImgNode.outputs[0], hMap.inputs[2])
+
     return hMap
 
 def CreateShaderNodeRGB(curMat, color,x = 0, y = 0,name = None, isVector = False):
