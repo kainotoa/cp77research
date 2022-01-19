@@ -60,8 +60,14 @@ class MeshDecal:
             CurMat.links.new(dColor.outputs[0],mixRGB.inputs[1])
 
         if "NormalTexture" in Data:
-            nMap = CreateShaderNodeNormalMap(CurMat,self.BasePath + Data["NormalTexture"],-200,-250,'NormalTexture',self.image_format)
-            CurMat.links.new(nMap.outputs[0],CurMat.nodes['Principled BSDF'].inputs['Normal'])
+            nMap = CreateShaderNodeNormalMap(CurMat,self.BasePath + Data["NormalTexture"],-400,-250,'NormalTexture',self.image_format)
+
+            if "HeightTexture" in Data:
+                hMap = CreateShaderNodeHeightMap(CurMat,self.BasePath + Data["HeightTexture"],-200,-300,'HeightTexture',self.image_format)
+                CurMat.links.new(nMap.outputs[0],hMap.inputs[5])
+                CurMat.links.new(hMap.outputs[0],CurMat.nodes['Principled BSDF'].inputs['Normal'])
+            else:
+                CurMat.links.new(nMap.outputs[0],CurMat.nodes['Principled BSDF'].inputs['Normal'])
 
         if "NormalAlpha" in Data:
             norAlphaVal = CreateShaderNodeValue(CurMat, Data["NormalAlpha"], -1200,-450, "NormalAlpha")

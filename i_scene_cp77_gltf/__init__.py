@@ -77,12 +77,23 @@ class CP77Import(bpy.types.Operator,ImportHelper):
                         index = 0
                         for rawmat in obj["Materials"]:
                             if rawmat["Name"] == matname:
-                                bpymat = Builder.create(index)
-                                bpy.data.meshes[name].materials.append(bpymat)
-                                usedMaterials.update( {matname: bpymat} )
+                                if matname in existingMaterials:
+                                    exmat = bpy.data.materials.get(matname)
+                                    bpy.data.meshes[name].materials.append(exmat)
+                                    usedMaterials.update( {matname: exmat} )
+                                
+                                else:
+                                    bpymat = Builder.create(index)
+                                    bpy.data.meshes[name].materials.append(bpymat)
+                                    usedMaterials.update( {matname: bpymat} )
                             index = index + 1
-                    else:
-                        bpy.data.meshes[name].materials.append(usedMaterials[matname])
+                            
+                    # This duplicates already existing materials on some submeshes for no reason, only seen the issue related to decals so far.
+                    # Needs more research, however has been disabled for now.
+                    ##################
+                    #else:
+                        # bpy.data.meshes[name].materials.append(usedMaterials[matname])
+                    ##################
                         
                 counter = counter + 1
 

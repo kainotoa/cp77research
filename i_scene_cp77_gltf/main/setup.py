@@ -86,4 +86,8 @@ class MaterialBuilder:
             glass = Glass(self.BasePath,self.image_format)
             glass.create(rawMat["Data"],bpyMat)
 
+        if rawMat["MaterialTemplate"] == "base\\materials\\mesh_decal_parallax.mt":
+            meshDecal = MeshDecal(self.BasePath,self.image_format)
+            meshDecal.create(rawMat["Data"],bpyMat)
+
         return bpyMat
