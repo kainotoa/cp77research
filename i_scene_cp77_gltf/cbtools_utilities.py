@@ -28,6 +28,7 @@ def imageFromPath(Img,image_format,isNormal = False):
             Im.colorspace_settings.name = 'Non-Color'
 
     return Im
+
 def CreateShaderNodeTexImage(curMat,path = None, x = 0, y = 0, name = None,image_format = 'png', nonCol = False):
     ImgNode = curMat.nodes.new("ShaderNodeTexImage")
     ImgNode.location = (x, y)
@@ -163,6 +164,7 @@ def CreateShaderNodeRGB(curMat, color,x = 0, y = 0,name = None, isVector = False
         rgbNode.outputs[0].default_value = (float(color["Red"])/255,float(color["Green"])/255,float(color["Blue"])/255,float(color["Alpha"])/255)
 
     return rgbNode
+
 def CreateShaderNodeValue(curMat, value = 0,x = 0, y = 0,name = None):
     valNode = curMat.nodes.new("ShaderNodeValue")
     valNode.location = (x,y)

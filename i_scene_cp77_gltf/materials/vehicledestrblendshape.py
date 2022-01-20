@@ -1,9 +1,9 @@
 import bpy
 import os
-from ..main.common import *
+from ..cbtools_utilities import *
 import json
 
-class Multilayered:
+class VehicleDestrBlendshape:
     def __init__(self, BasePath,image_format):
         self.BasePath = str(BasePath)
         self.image_format = image_format

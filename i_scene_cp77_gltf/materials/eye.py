@@ -1,8 +1,8 @@
 import bpy
 import os
-from ..main.common import *
+from ..cbtools_utilities import *
 
-class EyeGradient:
+class Eye:
     def __init__(self, BasePath,image_format):
         self.BasePath = BasePath
         self.image_format = image_format

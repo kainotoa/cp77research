@@ -5,5 +5,8 @@
 /.vs
 /OpusCLI/obj
 /WolvenKit/test/obj
+/i_scene_cp77_gltf_old
+
 __pycache__/
+.vscode
 
