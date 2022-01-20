@@ -1,26 +1,28 @@
 import bpy
 import os
-from ..material_types.multilayered import Multilayered
-from ..material_types.vehicledestrblendshape import VehicleDestrBlendshape
-from ..material_types.skin import Skin
-from ..material_types.meshdecal import MeshDecal
-from ..material_types.meshdecaldoublediffuse import MeshDecalDoubleDiffuse
-from ..material_types.vehiclemeshdecal import VehicleMeshDecal
-from ..material_types.metalbase import MetalBase
-from ..material_types.hair import Hair
-from ..material_types.meshdecalgradientmaprecolor import MeshDecalGradientMapReColor
-from ..material_types.eye import Eye
-from ..material_types.eyegradient import EyeGradient
-from ..material_types.eyeshadow import EyeShadow
-from ..material_types.meshdecalemissive import MeshDecalEmissive
-from ..material_types.glass import Glass
+
+from .materials.multilayered import Multilayered
+from .materials.vehicledestrblendshape import VehicleDestrBlendshape
+from .materials.skin import Skin
+from .materials.meshdecal import MeshDecal
+from .materials.meshdecaldoublediffuse import MeshDecalDoubleDiffuse
+from .materials.vehiclemeshdecal import VehicleMeshDecal
+from .materials.metalbase import MetalBase
+from .materials.hair import Hair
+from .materials.meshdecalgradientmaprecolor import MeshDecalGradientMapReColor
+from .materials.eye import Eye
+from .materials.eyegradient import EyeGradient
+from .materials.eyeshadow import EyeShadow
+from .materials.meshdecalemissive import MeshDecalEmissive
+from .materials.glass import Glass
 
 class MaterialBuilder:
-    def __init__(self,Obj,BasePath,image_format):
+    def __init__(self, Obj, BasePath, image_format):
         self.BasePath = BasePath
         self.image_format = image_format
         self.obj = Obj
-    def create(self,materialIndex):
+
+    def create(self, materialIndex):
         rawMat = self.obj["Materials"][materialIndex]
 
         bpyMat = bpy.data.materials.new(rawMat["Name"])
@@ -85,5 +87,9 @@ class MaterialBuilder:
         if rawMat["MaterialTemplate"] == "base\\materials\\glass.mt":
             glass = Glass(self.BasePath,self.image_format)
             glass.create(rawMat["Data"],bpyMat)
+
+        if rawMat["MaterialTemplate"] == "base\\materials\\mesh_decal_parallax.mt":
+            meshDecal = MeshDecal(self.BasePath,self.image_format)
+            meshDecal.create(rawMat["Data"],bpyMat)
 
         return bpyMat

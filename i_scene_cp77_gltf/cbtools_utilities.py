@@ -28,6 +28,7 @@ def imageFromPath(Img,image_format,isNormal = False):
             Im.colorspace_settings.name = 'Non-Color'
 
     return Im
+
 def CreateShaderNodeTexImage(curMat,path = None, x = 0, y = 0, name = None,image_format = 'png', nonCol = False):
     ImgNode = curMat.nodes.new("ShaderNodeTexImage")
     ImgNode.location = (x, y)
@@ -131,6 +132,25 @@ def CreateShaderNodeNormalMap(curMat,path = None, x = 0, y = 0, name = None,imag
         curMat.links.new(NormalRebuildGroup.outputs[0],nMap.inputs[1])
 
     return nMap
+
+def CreateShaderNodeHeightMap(curMat,path = None, x = 0, y = 0, name = None,image_format = 'png', nonCol = True):
+    hMap = curMat.nodes.new("ShaderNodeBump")
+    hMap.location = (x,y)
+    hMap.hide = True
+
+    if path is not None:
+        ImgNode = curMat.nodes.new("ShaderNodeTexImage")
+        ImgNode.location = (x - 400, y)
+        ImgNode.hide = True
+        if name is not None:
+            ImgNode.label = name
+        Img = imageFromPath(path,image_format,nonCol)
+        ImgNode.image = Img
+
+        curMat.links.new(ImgNode.outputs[0], hMap.inputs[2])
+
+    return hMap
+
 def CreateShaderNodeRGB(curMat, color,x = 0, y = 0,name = None, isVector = False):
     rgbNode = curMat.nodes.new("ShaderNodeRGB")
     rgbNode.location = (x, y)
@@ -144,6 +164,7 @@ def CreateShaderNodeRGB(curMat, color,x = 0, y = 0,name = None, isVector = False
         rgbNode.outputs[0].default_value = (float(color["Red"])/255,float(color["Green"])/255,float(color["Blue"])/255,float(color["Alpha"])/255)
 
     return rgbNode
+
 def CreateShaderNodeValue(curMat, value = 0,x = 0, y = 0,name = None):
     valNode = curMat.nodes.new("ShaderNodeValue")
     valNode.location = (x,y)

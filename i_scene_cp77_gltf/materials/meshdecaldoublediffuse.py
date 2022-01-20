@@ -1,8 +1,8 @@
 import bpy
 import os
-from ..main.common import *
+from ..cbtools_utilities import *
 
-class MeshDecal:
+class MeshDecalDoubleDiffuse:
     def __init__(self, BasePath,image_format):
         self.BasePath = BasePath
         self.image_format = image_format

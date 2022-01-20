@@ -1,6 +1,6 @@
 import bpy
 import os
-from ..main.common import *
+from ..cbtools_utilities import *
 
 
 class EyeShadow:
